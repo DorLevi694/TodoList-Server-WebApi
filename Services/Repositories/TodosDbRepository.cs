@@ -13,7 +13,7 @@ using TodoListWebApi.Utilities;
 
 namespace TodoListWebApi.Services.Repositories
 {
-  
+
     public class TodosDbRepository : ITodosRepository
     {
 
@@ -265,17 +265,17 @@ namespace TodoListWebApi.Services.Repositories
 
         private void ValidateTodoListFields(TodoList todoList)
         {
-            if (todoList.Description.ValidateLengthAndWords(MIN_LENGTH_LIST_DESCRIPTION
+            if (!todoList.Description.ValidateLengthAndWords(MIN_LENGTH_LIST_DESCRIPTION
                                                           , MIN_WORDS_COUNT_LIST_DESCRIPTION))
             {
-                throw new Exception();
+                throw new Exception("Dor");
                 // This request does not came from my angular app so I don't want to let him any information
             }
         }
 
         private void ValidateTodoItemFields(TodoItem todoItem)
         {
-            if (todoItem.Caption.ValidateLengthAndWords(MIN_LENGTH_ITEM_CAPTION
+            if (!todoItem.Caption.ValidateLengthAndWords(MIN_LENGTH_ITEM_CAPTION
                                                           , MIN_WORDS_COUNT_ITEM_CAPTION))
             {
                 throw new Exception();

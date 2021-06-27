@@ -13,7 +13,7 @@ namespace TodoListWebApi.Utilities
         {
             var wordsCount = str.Split(delimiter, StringSplitOptions.RemoveEmptyEntries).Length;
 
-            return ((str.Length >= 30) && (wordsCount >= 10));
+            return ((str.Length >= minLength) && (wordsCount >= minWords));
            
         }
     }

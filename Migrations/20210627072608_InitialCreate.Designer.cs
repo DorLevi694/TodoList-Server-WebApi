@@ -9,7 +9,7 @@ using TodoListWebApi.Data_Access;
 namespace TodoListWebApi.Migrations
 {
     [DbContext(typeof(TodosDbContext))]
-    [Migration("20210627031758_InitialCreate")]
+    [Migration("20210627072608_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
