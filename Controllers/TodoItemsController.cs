@@ -27,7 +27,6 @@ namespace TodoListWebApi.Controllers
 
 
         [HttpGet("", Name = nameof(GetAllTodoItems))]
-       // [Route("")]
         public async Task<ActionResult<List<TodoItemDto>>> GetAllTodoItems()
         {
             var results = (await _todosRepository.GetAllTodoItems())
@@ -36,7 +35,31 @@ namespace TodoListWebApi.Controllers
             return Ok(results);
         }
 
+        [HttpGet("ActiveItems", Name = nameof(GetAllActiveItems))]
+        public async Task<ActionResult<List<TodoItemDto>>> GetAllActiveItems()
+        {
+            var results = (await _todosRepository.GetAllActiveItems())
+                                                 .Select(item => TodoItemMapper.ToTodoItemDto(item));
 
+            return Ok(results);
+        }
+
+
+        [HttpGet("count", Name = nameof(GetCountOfItems))]
+        public async Task<ActionResult<int>> GetCountOfItems()
+        {
+            var count = await _todosRepository.GetCountOfItems();
+
+            return Ok(count);
+        }
+
+        [HttpGet("ActiveItems/count", Name = nameof(GetCountOfActiveItems))]
+        public async Task<ActionResult<int>> GetCountOfActiveItems()
+        {
+            var count = await _todosRepository.GetCountOfActiveItems();
+
+            return Ok(count);
+        }
 
         [HttpGet("{id}", Name = nameof(GetTodoItemById))]
      //   [Route("{id}")]
@@ -61,7 +84,7 @@ namespace TodoListWebApi.Controllers
         {
             try
             {
-                var newItem = TodoItemMapper.ToTodoItem(todoItemDto);
+                var newItem = TodoItemMapper.ToTodoItem(todoItemDto);                
 
                 var result = await _todosRepository.AddNewTodoItem(newItem);
 

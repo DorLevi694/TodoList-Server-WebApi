@@ -22,5 +22,8 @@ namespace TodoListWebApi.Contracts
         //delete
         Task<Task> DeleteTodoList(int id);
 
+
+        //counts
+        Task<int> GetCountOfLists();
     }
 }

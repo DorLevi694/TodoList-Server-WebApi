@@ -25,7 +25,6 @@ namespace TodoListWebApi.Controllers
 
 
         [HttpGet("", Name = nameof(GetAllTodoLists))]
-
         public async Task<ActionResult<List<TodoListDto>>> GetAllTodoLists()
         {
             var results = (await _todosRepository.GetAllTodoLists())
@@ -35,8 +34,20 @@ namespace TodoListWebApi.Controllers
         }
 
 
+
+        [HttpGet("count", Name = nameof(GetCountOfLists))]
+        public async Task<ActionResult<int>> GetCountOfLists()
+        {
+            var count = await _todosRepository.GetCountOfLists();
+
+            return Ok(count);
+        }
+
+
+
+
+
         [HttpGet("{id}", Name = nameof(GetTodoListById))]
-        //  [Route()]
         public async Task<ActionResult<TodoListDto>> GetTodoListById(int id)
         {
             var result = await _todosRepository.GetTodoListById(id);
@@ -51,7 +62,14 @@ namespace TodoListWebApi.Controllers
         }
 
 
+        [HttpGet("{id}/items", Name = nameof(GetAllItemsOfTodoListByListId))]
+        public async Task<ActionResult<List<TodoItemDto>>> GetAllItemsOfTodoListByListId(int id)
+        {
+            var result = (await _todosRepository.GetAllItemsOfTodoListByListId(id))
+                            .Select(item => TodoItemMapper.ToTodoItemDto(item));
 
+            return Ok(result);
+        }
 
 
 

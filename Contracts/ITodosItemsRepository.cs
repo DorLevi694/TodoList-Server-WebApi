@@ -8,8 +8,13 @@ namespace TodoListWebApi.Contracts
     {
         // Get
         Task<List<TodoItem>> GetAllTodoItems();
+        Task<List<TodoItem>> GetAllActiveItems();
         Task<TodoItem> GetTodoItemById(int id);
+        Task<List<TodoItem>> GetAllItemsOfTodoListByListId(int listId);
 
+        // Get - counts
+        Task<int> GetCountOfItems();
+        Task<int> GetCountOfActiveItems();
 
         // Post
         Task<TodoItem> AddNewTodoItem(TodoItem todoItem);
@@ -21,6 +26,10 @@ namespace TodoListWebApi.Contracts
 
         // delete
         Task<Task> DeleteTodoItem(int id);
+
+
+
+       
 
 
     }
