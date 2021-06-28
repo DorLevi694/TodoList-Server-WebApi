@@ -44,7 +44,6 @@ namespace TodoListWebApi.Controllers
             return Ok(results);
         }
 
-
         [HttpGet("count", Name = nameof(GetCountOfItems))]
         public async Task<ActionResult<int>> GetCountOfItems()
         {
@@ -62,7 +61,6 @@ namespace TodoListWebApi.Controllers
         }
 
         [HttpGet("{id}", Name = nameof(GetTodoItemById))]
-     //   [Route("{id}")]
         public async Task<ActionResult<TodoItemDto>> GetTodoItemById(int id)
         {
             var result = await _todosRepository.GetTodoItemById(id);
@@ -79,7 +77,6 @@ namespace TodoListWebApi.Controllers
 
 
         [HttpPost("",Name = nameof(AddNewTodoItem))]
-        //[Route("")]
         public async Task<ActionResult<TodoItemDto>> AddNewTodoItem([FromBody] TodoItemDto todoItemDto)
         {
             try
@@ -99,7 +96,6 @@ namespace TodoListWebApi.Controllers
 
 
         [HttpDelete("{id}",Name = nameof(DeleteTodoItem))]
-        //[Route()]
         public async Task<ActionResult> DeleteTodoItem(int id)
         {
             try
@@ -107,20 +103,13 @@ namespace TodoListWebApi.Controllers
                 await _todosRepository.DeleteTodoItem(id);
                 return NoContent();
             }
-            catch (ArgumentException e)
-            {
-                return NotFound(e.Message);
-            }
             catch (Exception e)
             {
                 return NotFound(e.Message);
             }
         }
 
-
-
         [HttpPut("{id}", Name = nameof(UpdateTodoItem))]
-        //[Route("{id}")]
         public async Task<ActionResult<TodoItemDto>> UpdateTodoItem
             (int id, [FromBody] TodoItemDto todoItemDto)
         {
@@ -133,10 +122,6 @@ namespace TodoListWebApi.Controllers
                 var retVal = TodoItemMapper.ToTodoItemDto(result);
                 return Ok(retVal);
             }
-            catch (FormatException e)
-            {
-                return BadRequest("UpdateTodoItem:\n" + e.Message);
-            }
             catch (ArgumentException e)
             {
                 return NotFound("UpdateTodoItem:\n" + e.Message);
@@ -148,34 +133,6 @@ namespace TodoListWebApi.Controllers
             }
 
 
-        }
-
-
-        private static async Task<List<TodoItem>> GetFakeTodoItemAsync()
-        {
-            var todoItem_1 = new TodoItem()
-            {
-                Id = 1,
-                Caption = "Caption-1",
-                IsCompleted = true,
-                ListId = 1,
-                List = null
-            };
-
-            var todoItem_2 = new TodoItem()
-            {
-                Id = 2,
-                Caption = "Caption-2",
-                IsCompleted = false,
-                ListId = 2,
-                List = null
-            };
-
-            // Create a list of parts.
-            List<TodoItem> items = new () { todoItem_1, todoItem_2 };
-
-            await Task.Delay(500);
-            return items;
         }
     }
 }

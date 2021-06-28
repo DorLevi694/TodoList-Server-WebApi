@@ -75,7 +75,6 @@ namespace TodoListWebApi.Controllers
 
 
         [HttpPost("", Name = nameof(AddNewTodoList))]
-        //[Route("")]
         public async Task<ActionResult<TodoListDto>> AddNewTodoList([FromBody] TodoListDto todoListDto)
         {
             var newList = TodoListMapper.ToTodoList(todoListDto);
@@ -91,17 +90,12 @@ namespace TodoListWebApi.Controllers
 
 
         [HttpDelete("{id}", Name = nameof(DeleteTodoList))]
-        //[Route("{id}")]
         public async Task<ActionResult> DeleteTodoList(int id)
         {
             try
             {
                 await _todosRepository.DeleteTodoList(id);
                 return NoContent();
-            }
-            catch (ArgumentException e)
-            {
-                return NotFound(e.Message);
             }
             catch (Exception e)
             {
@@ -117,7 +111,6 @@ namespace TodoListWebApi.Controllers
 
 
         [HttpPut("{id}", Name = nameof(UpdateTodoList))]
-        // [Route("{id}")]
         public async Task<ActionResult<TodoListDto>> UpdateTodoList
             (int id, [FromBody] TodoListDto todoListDto)
         {
@@ -129,10 +122,6 @@ namespace TodoListWebApi.Controllers
 
                 var retVal = TodoListMapper.ToTodoListDto(result);
                 return Ok(retVal);
-            }
-            catch (FormatException e)
-            {
-                return BadRequest("UpdateTodoList:\n" + e.Message);
             }
             catch (ArgumentException e)
             {

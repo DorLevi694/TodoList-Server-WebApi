@@ -268,7 +268,7 @@ namespace TodoListWebApi.Services.Repositories
             if (!todoList.Description.ValidateLengthAndWords(MIN_LENGTH_LIST_DESCRIPTION
                                                           , MIN_WORDS_COUNT_LIST_DESCRIPTION))
             {
-                throw new Exception("Dor");
+                throw new Exception("");
                 // This request does not came from my angular app so I don't want to let him any information
             }
         }
