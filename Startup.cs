@@ -38,7 +38,8 @@ namespace TodoListWebApi
                 options.AddPolicy(name: myPolicy,
                     builder =>
                     {
-                        builder.WithOrigins($"http://localhost:4200")
+                        var clientSideAddres = Configuration.GetSection("ClientSideAddress").GetValue<string>("Client");
+                        builder.WithOrigins(clientSideAddres)
                                 .AllowAnyHeader()
                                 .AllowAnyMethod();
                     });
