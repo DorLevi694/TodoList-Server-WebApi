@@ -97,9 +97,9 @@ namespace TodoListWebApi.Controllers
                 await _todosRepository.DeleteTodoList(id);
                 return NoContent();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return NotFound(e.Message);
+                return NotFound();
             }
         }
 
@@ -123,14 +123,14 @@ namespace TodoListWebApi.Controllers
                 var retVal = TodoListMapper.ToTodoListDto(result);
                 return Ok(retVal);
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
-                return NotFound("UpdateTodoList:\n" + e.Message);
+                return NotFound();
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest("UpdateTodoList:\n" + e.Message);
+                return BadRequest();
             }
 
 

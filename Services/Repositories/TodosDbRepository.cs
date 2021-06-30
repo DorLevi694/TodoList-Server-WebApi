@@ -120,8 +120,6 @@ namespace TodoListWebApi.Services.Repositories
             list.Color = todoList.Color;
             list.Description = todoList.Description;
             list.ImageUrl = todoList.ImageUrl;
-            //list.Items = todoList.Items; ;
-            // _todosDbContext.Entry(todoList).State = EntityState.Modified;
 
             try
             {
@@ -222,42 +220,33 @@ namespace TodoListWebApi.Services.Repositories
 
         public async Task<int> GetCountOfLists()
         {
-            var x = await _todosDbContext.TodoLists.CountAsync();
-            return x;
-
+            return await _todosDbContext.TodoLists.CountAsync();
         }
 
         public async Task<int> GetCountOfItems()
         {
-            var x = await _todosDbContext.TodoItems.CountAsync();
-            return x;
+            return await _todosDbContext.TodoItems.CountAsync();          
         }
 
         public async Task<int> GetCountOfActiveItems()
         {
-            var x = await _todosDbContext.TodoItems
+            return await _todosDbContext.TodoItems
                                          .Where(item => item.IsCompleted == false)
                                          .CountAsync();
-
-            return x;
         }
 
         public async Task<List<TodoItem>> GetAllItemsOfTodoListByListId(int listId)
         {
-            var x = await _todosDbContext.TodoItems
+            return await _todosDbContext.TodoItems
                                         .Where(item => item.ListId == listId)
                                          .ToListAsync();
-
-            return x;
         }
 
         public async Task<List<TodoItem>> GetAllActiveItems()
         {
-            var x = await _todosDbContext.TodoItems
+            return await _todosDbContext.TodoItems
                                          .Where(item => item.IsCompleted == false)
                                          .ToListAsync();
-
-            return x;
         }
 
 
@@ -268,7 +257,7 @@ namespace TodoListWebApi.Services.Repositories
             if (!todoList.Description.ValidateLengthAndWords(MIN_LENGTH_LIST_DESCRIPTION
                                                           , MIN_WORDS_COUNT_LIST_DESCRIPTION))
             {
-                throw new Exception("");
+                throw new Exception();
                 // This request does not came from my angular app so I don't want to let him any information
             }
         }
